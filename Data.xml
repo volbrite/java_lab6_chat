@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<data>
+<uzytkownik><nazwaUzytkownika>testUser</nazwaUzytkownika><haslo>haslo</haslo></uzytkownik>
+<uzytkownik><nazwaUzytkownika>Michal</nazwaUzytkownika><haslo>qwerty</haslo></uzytkownik>
+<uzytkownik><nazwaUzytkownika>qwerty</nazwaUzytkownika><haslo>qwerty</haslo></uzytkownik>
+</data>
