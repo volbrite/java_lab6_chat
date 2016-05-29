@@ -154,7 +154,7 @@ public class Serwer implements Runnable {
                     if (db.sprawdzLogin(msg.wysylajacy, msg.zawartosc)) {
                         klienci[znajdzKlienta(ID)].nazwaUzytkownika = msg.wysylajacy;
                         klienci[znajdzKlienta(ID)].send(new Wiadomosc("zaloguj", "SERWER", "TRUE", msg.wysylajacy));
-                        powiadomWszystkich("newuser", "SERVER", msg.wysylajacy);
+                        powiadomWszystkich("nowyUzytkownik", "SERWER", msg.wysylajacy);
                         wyslijNowaListeUzytkownikow(msg.wysylajacy);
                     } else {
                         klienci[znajdzKlienta(ID)].send(new Wiadomosc("zaloguj", "SERWER", "FALSE", msg.wysylajacy));
