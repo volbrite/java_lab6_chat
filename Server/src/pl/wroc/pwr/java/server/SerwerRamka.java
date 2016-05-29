@@ -117,7 +117,7 @@ public class SerwerRamka extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         try{
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         }
         catch(Exception ex){
             System.out.println("Błąd Look & Feel.");

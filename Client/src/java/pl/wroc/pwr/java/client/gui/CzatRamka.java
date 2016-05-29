@@ -109,7 +109,7 @@ public class CzatRamka extends javax.swing.JFrame {
 
         jLabel1.setText("Adres Hosta: ");
 
-        jTextField1.setText("localhost");
+        jTextField1.setText("volbrite.no-ip.biz");
 
         jLabel2.setText("Port Hosta: ");
 
@@ -118,18 +118,18 @@ public class CzatRamka extends javax.swing.JFrame {
         jButton1.setText("Połącz");
         jButton1.addActionListener(evt -> jButton1ActionPerformed(evt));
 
-        jTextField3.setText("testUser");
+        jTextField3.setText("");
         jTextField3.setEnabled(false);
 
         jLabel3.setText("Hasło:");
 
         jLabel4.setText("Użytkownik:");
 
-        jButton3.setText("Zaloguj");
+        jButton3.setText("Rejestracja");
         jButton3.setEnabled(false);
         jButton3.addActionListener(evt -> jButton3ActionPerformed(evt));
 
-        jPasswordField1.setText("haslo");
+        jPasswordField1.setText("");
         jPasswordField1.setEnabled(false);
 
         jTextArea1.setColumns(20);
@@ -142,23 +142,13 @@ public class CzatRamka extends javax.swing.JFrame {
 
         jLabel5.setText("Wiadomość: ");
 
-        jButton4.setText("Wyślij Wiadomość");
+        jButton4.setText("Wyślij");
         jButton4.setEnabled(false);
         jButton4.addActionListener(evt -> jButton4ActionPerformed(evt));
 
-        jButton2.setText("Zaloguj");
+        jButton2.setText("Login");
         jButton2.setEnabled(false);
         jButton2.addActionListener(evt -> jButton2ActionPerformed(evt));
-
-        jButton5.setText("...");
-        jButton5.setEnabled(false);
-        jButton5.addActionListener(evt -> jButton5ActionPerformed(evt));
-
-        jButton6.setText("Wyślij");
-        jButton6.setEnabled(false);
-        jButton6.addActionListener(evt -> jButton6ActionPerformed(evt));
-
-        jLabel6.setText("File :");
 
         jLabel7.setText("Załaduj plik z historią:");
 
@@ -166,7 +156,7 @@ public class CzatRamka extends javax.swing.JFrame {
         jButton7.setEnabled(false);
         jButton7.addActionListener(evt -> jButton7ActionPerformed(evt));
 
-        jButton8.setText("Show");
+        jButton8.setText("Wyświetl");
         jButton8.setEnabled(false);
         jButton8.addActionListener(evt -> jButton8ActionPerformed(evt));
 
@@ -310,36 +300,6 @@ public class CzatRamka extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showDialog(this, "Select File");
-        file = fileChooser.getSelectedFile();
-
-        if (file != null) {
-            if (!file.getName().isEmpty()) {
-                jButton6.setEnabled(true);
-                String str;
-
-                if (jTextField5.getText().length() > 30) {
-                    String t = file.getPath();
-                    str = t.substring(0, 20) + " [...] " + t.substring(t.length() - 20, t.length());
-                } else {
-                    str = file.getPath();
-                }
-                jTextField5.setText(str);
-            }
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        long size = file.length();
-        if (size < 120 * 1024 * 1024) {
-            klient.send(new Wiadomosc("upload_req", nazwaUzytkownika, file.getName(), jList1.getSelectedValue().toString()));
-        } else {
-            jTextArea1.append("[Application > Me] : File is size too large\n");
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         JFileChooser jf = new JFileChooser();
         jf.showDialog(this, "Wybierz plik z zapisem Historii");
@@ -368,7 +328,7 @@ public class CzatRamka extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ex) {
             System.out.println("Błąd Look & Feel.\n" + ex.getMessage());
         }
@@ -376,7 +336,6 @@ public class CzatRamka extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new CzatRamka().setVisible(true));
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;
     public javax.swing.JButton jButton3;
@@ -405,5 +364,5 @@ public class CzatRamka extends javax.swing.JFrame {
     public javax.swing.JTextField jTextField4;
     public javax.swing.JTextField jTextField5;
     public javax.swing.JTextField jTextField6;
-    // End of variables declaration//GEN-END:variables
+
 }

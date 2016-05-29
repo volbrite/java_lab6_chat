@@ -121,47 +121,14 @@ public class Klient implements Runnable {
                         gui.model.removeElement(msg.zawartosc);
                         gui.jTextArea1.append("<" + msg.wysylajacy + " => Wszyscy> : " + msg.zawartosc + " wylogował się.\n");
                     }
-                } else if (msg.typWiadomosci.equals("upload_req")) {
 
-                    if (JOptionPane.showConfirmDialog(gui, ("Accept '" + msg.zawartosc + "' from " + msg.wysylajacy + " ?")) == 0) {
-
-                        JFileChooser jf = new JFileChooser();
-                        jf.setSelectedFile(new File(msg.zawartosc));
-                        int returnVal = jf.showSaveDialog(gui);
-
-                        String saveTo = jf.getSelectedFile().getPath();
-                        if (saveTo != null && returnVal == JFileChooser.APPROVE_OPTION) {
-                            Download dwn = new Download(saveTo, gui);
-                            Thread t = new Thread(dwn);
-                            t.start();
-                            //send(new Wiadomosc("upload_res", (""+InetAddress.getLocalHost().getHostAddress()), (""+dwn.port), msg.wysylajacy));
-                            send(new Wiadomosc("upload_res", gui.nazwaUzytkownika, ("" + dwn.port), msg.wysylajacy));
-                        } else {
-                            send(new Wiadomosc("upload_res", gui.nazwaUzytkownika, "NO", msg.wysylajacy));
-                        }
-                    } else {
-                        send(new Wiadomosc("upload_res", gui.nazwaUzytkownika, "NO", msg.wysylajacy));
-                    }
-                } else if (msg.typWiadomosci.equals("upload_res")) {
-                    if (!msg.zawartosc.equals("NO")) {
-                        int port = Integer.parseInt(msg.zawartosc);
-                        String addr = msg.wysylajacy;
-
-                        gui.jButton5.setEnabled(false);
-                        gui.jButton6.setEnabled(false);
-                        Upload upl = new Upload(addr, port, gui.file, gui);
-                        Thread t = new Thread(upl);
-                        t.start();
-                    } else {
-                        gui.jTextArea1.append("[SERVER > Me] : " + msg.wysylajacy + " rejected file request\n");
-                    }
                 } else {
-                    gui.jTextArea1.append("[SERVER > Me] : Unknown message typWiadomosci\n");
+                    gui.jTextArea1.append("<SERWER => " + gui.nazwaUzytkownika + "> : Nie rozpoznano typWiadomosci\n");
                 }
             } catch (Exception ex) {
                 keepRunning = false;
                 ex.printStackTrace();
-                gui.jTextArea1.append("[Application > Me] : Connection Failure\n");
+                gui.jTextArea1.append("<JAVA-V-Comm => " + gui.nazwaUzytkownika + "> : Connection Failure\n");
                 gui.jButton1.setEnabled(true);
                 gui.jTextField1.setEditable(true);
                 gui.jTextField2.setEditable(true);
@@ -175,7 +142,7 @@ public class Klient implements Runnable {
 
                 gui.watekKlienta.stop();
 
-                System.out.println("Exception Klient run()");
+                System.out.println("Wyjątek w Klient run()");
                 ex.printStackTrace();
             }
         }
@@ -197,7 +164,8 @@ public class Klient implements Runnable {
                 }
             }
         } catch (IOException ex) {
-            System.out.println("Exception Klient send()");
+            System.out.println("Wyjątek w Klient send()");
+            ex.printStackTrace();
         }
     }
 

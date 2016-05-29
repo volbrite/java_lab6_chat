@@ -186,19 +186,6 @@ public class Serwer implements Runnable {
                 } else {
                     klienci[znajdzKlienta(ID)].send(new Wiadomosc("zarejestrujUzytkownika", "SERWER", "FALSE", msg.wysylajacy));
                 }
-            } else if (msg.typWiadomosci.equals("upload_req")) {
-                if (msg.odbiorca.equals("All")) {
-                    klienci[znajdzKlienta(ID)].send(new Wiadomosc("message", "SERVER", "Uploading to 'All' forbidden", msg.wysylajacy));
-                } else {
-                    znajdzWatekUzytkownika(msg.odbiorca).send(new Wiadomosc("upload_req", msg.wysylajacy, msg.zawartosc, msg.odbiorca));
-                }
-            } else if (msg.typWiadomosci.equals("upload_res")) {
-                if (!msg.zawartosc.equals("NO")) {
-                    String IP = znajdzWatekUzytkownika(msg.wysylajacy).socket.getInetAddress().getHostAddress();
-                    znajdzWatekUzytkownika(msg.odbiorca).send(new Wiadomosc("upload_res", IP, msg.zawartosc, msg.odbiorca));
-                } else {
-                    znajdzWatekUzytkownika(msg.odbiorca).send(new Wiadomosc("upload_res", msg.wysylajacy, msg.zawartosc, msg.odbiorca));
-                }
             }
         }
     }
